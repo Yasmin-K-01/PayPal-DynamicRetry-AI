@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment & Secrets
+.env
+.env.local
+config.json
+
+# Build Outputs & Logs
+dist/
+build/
+*.log
+
+# OS & Editor Files
+.DS_Store
+.vscode/
+.idea/
