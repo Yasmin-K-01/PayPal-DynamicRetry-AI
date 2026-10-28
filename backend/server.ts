@@ -56,6 +56,7 @@ app.post('/webhooks/paypal', async (req: Request, res: Response) => {
   const amount = resource.amount?.value || 49.99;
 
   try {
+    const FASTAPI_BASE_URL = process.env.FASTAPI_URL || 'https://paypal-dynamicretry-ai.onrender.com';
     // 1. Send failure details to Python FastAPI engine for AI Scoring
     const aiRes = await axios.post(`${process.env.FASTAPI_URL}/api/v1/evaluate`, {
       transaction_id: transactionId,
@@ -64,6 +65,7 @@ app.post('/webhooks/paypal', async (req: Request, res: Response) => {
       attempt_count: 1
     });
 
+    
     const { score, decision, breakdown } = aiRes.data;
 
     // 2. Save evaluation into MySQL transactions & retry_logs table
